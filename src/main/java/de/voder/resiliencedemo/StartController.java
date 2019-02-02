@@ -7,8 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StartController {
 
+    private GreetingService greetingService;
+
+    public StartController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
     @GetMapping("/start")
     public ResponseEntity<Greeting> start() {
-        return ResponseEntity.ok(new Greeting("Huhu"));
+        Greeting greeting = greetingService.getGreeting();
+        return ResponseEntity.ok(greeting);
     }
 }
